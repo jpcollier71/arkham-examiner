@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/js/auth-check.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>{{ title }}</h1>
+
+    <div id="chapter-text">
+      {{ content | safe }}
+    </div>
+
+    {% if audio_url %}
+    <div id="chapter-audio">
+      <audio controls>
+        <source src="{{ audio_url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    {% endif %}
+  </main>
+</body>
+</html>
