@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ title }} | The Arkham Examiner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600&family=Alegreya+Sans:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" href="/images/favicon.ico" />
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <div class="chronicle-meta">Chronicle {{ chronicle_id }}</div>
+    {% if audio_url %}
+      <audio controls preload="none">
+        <source src="{{ audio_url }}" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    {% endif %}
+    {{ content | safe }}
+  </body>
+</html>

@@ -1,0 +1,51 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/images"
+public_folder: "/images"
+
+collections:
+  - name: "chronicle001"
+    label: "Chronicle 001"
+    folder: "content/chronicle-001"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Chronicle ID", name: "chronicle_id", widget: "string", default: "001" }
+      - { label: "Audio URL", name: "audio_url", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "chronicle002"
+    label: "Chronicle 002"
+    folder: "content/chronicle-002"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Chronicle ID", name: "chronicle_id", widget: "string", default: "002" }
+      - { label: "Audio URL", name: "audio_url", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "chronicle003"
+    label: "Chronicle 003"
+    folder: "content/chronicle-003"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Chronicle ID", name: "chronicle_id", widget: "string", default: "003" }
+      - { label: "Audio URL", name: "audio_url", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "chronicle004"
+    label: "Chronicle 004"
+    folder: "content/chronicle-004"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Chronicle ID", name: "chronicle_id", widget: "string", default: "004" }
+      - { label: "Audio URL", name: "audio_url", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }

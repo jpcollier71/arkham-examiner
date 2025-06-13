@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ title }} | The Arkham Examiner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" href="/images/favicon.ico" />
+    <script>
+      // Simulated access level (replace with real auth logic later)
+      window.userAccessLevel = 3;
+    </script>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+
+    {% if intro_video_url %}
+    <video autoplay muted loop playsinline style="width: 100%; max-height: 400px; object-fit: cover;">
+      <source src="{{ intro_video_url }}" type="video/mp4" />
+    </video>
+    {% endif %}
+
+    {% if intro_audio_url %}
+    <audio controls preload="none" style="margin-top: 1em; display: block; width: 100%;">
+      <source src="{{ intro_audio_url }}" type="audio/mpeg" />
+    </audio>
+    {% endif %}
+
+    {% if intro_text %}
+    <div class="intro-text">{{ intro_text | safe }}</div>
+    {% endif %}
+
+    {% if chronicle_audio_url %}
+    <div class="gated-content" data-access="2" style="margin: 2em 0;">
+      <audio controls preload="none" style="width: 100%;">
+        <source src="{{ chronicle_audio_url }}" type="audio/mpeg" />
+      </audio>
+    </div>
+    {% endif %}
+
+    <div class="gated-content" data-access="1">
+      {% set chapter_index = 0 %}
+      {% for block in content | safe | split("## ") %}
+        {% if block.trim() %}
+          {% set chapter = chapters[chapter_index] %}
+          <div class="chapter-block" style="margin-top: 3em;">
+            {% if chapter.image %}
+              <img src="{{ chapter.image }}" alt="{{ chapter.title }}" style="max-width: 100%; margin-bottom: 1em;" />
+            {% endif %}
+            <h2>{{ chapter.title }}</h2>
+            <div class="chapter-text">
+              {{ block | safe }}
+            </div>
+          </div>
+          {% set chapter_index = chapter_index + 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        const level = window.userAccessLevel;
+        document.querySelectorAll(".gated-content").forEach(el => {
+          const required = parseInt(el.dataset.access);
+          const allow =
+            (required === 1 && (level === 1 || level === 3)) ||
+            (required === 2 && (level === 2 || level === 3));
+          el.style.display = allow ? "block" : "none";
+        });
+      });
+    </script>
+  </body>
+</html>

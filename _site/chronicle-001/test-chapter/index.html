@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>A Whisper in the Fog | The Arkham Examiner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600&family=Alegreya+Sans:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" href="/images/favicon.ico" />
+
+    <!-- 🔐 Simulated Access Level -->
+    <script>
+      // Simulated role (replace this with dynamic identity logic later)
+      window.userAccessLevel = 3; // 1 = text only, 2 = audio only, 3 = both
+    </script>
+  </head>
+  <body>
+    <h1>A Whisper in the Fog</h1>
+    <div class="chronicle-meta">Chronicle 001</div>
+
+    
+    <div class="gated-content" data-access="2">
+      <audio controls preload="none">
+        <source src="https://storage.googleapis.com/msgsndr/rdO9ydj88UzwaXYh6rTr/media/683484d057a3bf00587527f6.mpeg" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    
+
+    <div class="gated-content" data-access="1">
+      <p>This is a test of the full layout with external CSS.</p>
+
+    </div>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    console.log("Access level:", window.userAccessLevel, "→ evaluating gated content...");
+
+    document.querySelectorAll(".gated-content").forEach(el => {
+      const access = parseInt(el.dataset.access);
+      const level = window.userAccessLevel;
+
+      const allow =
+        (access === 1 && (level === 1 || level === 3)) ||
+        (access === 2 && (level === 2 || level === 3));
+
+      if (allow) {
+        console.log("✅ Showing content gated at level", access);
+      } else {
+        el.style.display = "none";
+        console.log("❌ Hiding content gated at level", access);
+      }
+    });
+  });
+</script>
+
+  </body>
+</html>
